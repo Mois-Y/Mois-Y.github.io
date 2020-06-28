@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ES6语法（来自b站课件）, Mois的博客">
+    <meta name="keywords" content="Vue学习（二）, Mois的博客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>ES6语法（来自b站课件） | Mois的博客</title>
+    <title>Vue学习（二） | Mois的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">ES6语法（来自b站课件）</h1>
+                    <h1 class="description center-align post-title">Vue学习（二）</h1>
                 </div>
             </div>
         </div>
@@ -451,7 +451,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-06-27
+                    2020-06-28
                 </div>
                 
 
@@ -467,10 +467,15 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <img src="/img/ES601.png">
-<img src="/img/ES602.png">
-<img src="/img/ES603.png">
+                <h3>1.1 过滤器：</h3>
+<h4>在js中使用filters设置，运用‘item|过滤器’</h4>
 
+<h3>1.2 v-model：</h3>
+<h4>v-model指令可以实现表单元素和数据的双向绑定，如：动态得到输入框(input、textarea)的值</h4>
+<h4>v-model其实是一个语法糖，它的背后本质上是包含两个操作：</h4>
+    <li>1.v-bind绑定一个value属性，得到值</li>
+    <li>2.v-on指令给当前元素绑定input事件，监听值的改变</li>
+<pre><code>&lt;input type&#x3D;&quot;text&quot; v-bind:value&#x3D;&quot;message&quot; v-on:input&#x3D;&quot;message &#x3D; $event.target.value&quot;&gt;</code></pre>
 
             </div>
             <hr/>
@@ -496,7 +501,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://mois-y.github.io/2020/06/27/es6-yu-fa-lai-zi-b-zhan-ke-jian/">https://mois-y.github.io/2020/06/27/es6-yu-fa-lai-zi-b-zhan-ke-jian/</a>
+                    <a href="https://mois-y.github.io/2020/06/28/vue-xue-xi-er/">https://mois-y.github.io/2020/06/28/vue-xue-xi-er/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -699,9 +704,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/06/28/vue-xue-xi-er/">
                     <div class="card-image">
@@ -724,9 +730,9 @@ v-model其实是一个语法
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-28
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -735,6 +741,7 @@ v-model其实是一个语法
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -745,26 +752,28 @@ v-model其实是一个语法
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/12/qian-duan-ji-chu-zhi-shi-zong-jie/">
+                <a href="/2020/06/27/es6-yu-fa-lai-zi-b-zhan-ke-jian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="前端基础知识总结">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="ES6语法（来自b站课件）">
                         
-                        <span class="card-title">前端基础知识总结</span>
+                        <span class="card-title">ES6语法（来自b站课件）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            JavaScript面试题
-https://segmentfault.com/a/1190000015288700
+                            
+
+
+
 
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-27
                             </span>
                         <span class="publish-author">
                             
@@ -773,14 +782,6 @@ https://segmentfault.com/a/1190000015288700
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">前端学习</span>
-                    </a>
-                    
                 </div>
                 
             </div>
