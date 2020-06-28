@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://mois-y.github.io/"/>
-  <updated>2020-05-12T04:24:26.832Z</updated>
+  <updated>2020-06-27T07:18:15.744Z</updated>
   <id>https://mois-y.github.io/</id>
   
   <author>
@@ -17,13 +17,48 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>ES6语法（来自b站课件）</title>
+    <link href="https://mois-y.github.io/2020/06/27/es6-yu-fa-lai-zi-b-zhan-ke-jian/"/>
+    <id>https://mois-y.github.io/2020/06/27/es6-yu-fa-lai-zi-b-zhan-ke-jian/</id>
+    <published>2020-06-27T07:15:13.000Z</published>
+    <updated>2020-06-27T07:18:15.744Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;img src=&quot;/img/ES601.png&quot;&gt;
+&lt;img src=&quot;/img/ES602.png&quot;&gt;
+&lt;img
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>前端基础知识总结</title>
     <link href="https://mois-y.github.io/2020/05/12/qian-duan-ji-chu-zhi-shi-zong-jie/"/>
     <id>https://mois-y.github.io/2020/05/12/qian-duan-ji-chu-zhi-shi-zong-jie/</id>
     <published>2020-05-12T04:19:45.000Z</published>
-    <updated>2020-05-12T04:24:26.832Z</updated>
+    <updated>2020-06-25T08:11:12.559Z</updated>
     
     <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h4&gt;JavaScript面试题&lt;/h4&gt;
+&lt;a&gt;https://segmentfault.com/a/1190000015288700&lt;/a&gt;
+
+        
+      
     
     </summary>
     
@@ -38,7 +73,7 @@
     <link href="https://mois-y.github.io/2020/05/12/vue-xue-xi-yi/"/>
     <id>https://mois-y.github.io/2020/05/12/vue-xue-xi-yi/</id>
     <published>2020-05-12T04:14:40.000Z</published>
-    <updated>2020-05-26T10:21:58.549Z</updated>
+    <updated>2020-06-28T05:44:21.082Z</updated>
     
     <summary type="html">
     
@@ -46,12 +81,8 @@
       
         
         
-          &lt;style&gt;
-.d-list{
-    font-size: 15pt;
-    display:list-item;
-    list-style-position: inside;
-    list-style-type:
+          &lt;link rel=&quot;stylesheet&quot; href=&quot;//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css&quot;&gt;
+&lt;script
         
       
     
