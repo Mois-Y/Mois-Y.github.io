@@ -690,7 +690,7 @@
 <li>通过props向子组件传递数据</li>
 <li>通过事件($emit Events)向父组件发送消息</li>
 
-<h5>父向子传数据（props）</h5>
+<h5> 1.3.6.1 父向子传数据（props）</h5>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang&#x3D;&quot;en&quot;&gt;
 &lt;head&gt;
@@ -758,7 +758,7 @@
 &lt;&#x2F;body&gt;
 &lt;&#x2F;html&gt;</code></pre>
 
-<h5>子向父传数据（$emit()发射事件）</h5>
+<h5> 1.3.6.2 子向父传数据（$emit()发射事件）</h5>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang&#x3D;&quot;en&quot;&gt;
 &lt;head&gt;
@@ -820,6 +820,272 @@
 &lt;&#x2F;script&gt;
 &lt;&#x2F;body&gt;
 &lt;&#x2F;html&gt;</code></pre>
+
+<h5> 1.3.6.3 父子间相互传递数据</h5>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;title&gt;父子组件通信&lt;&#x2F;title&gt;
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+&lt;div id&#x3D;&quot;app&quot;&gt;
+    &lt;cpn :number1&#x3D;&quot;num1&quot;
+         :number2&#x3D;&quot;num2&quot;
+         @num1change&#x3D;&quot;num1change&quot;
+         @num2change&#x3D;&quot;num2change&quot;&gt;&lt;&#x2F;cpn&gt;
+&lt;&#x2F;div&gt;
+&lt;template id&#x3D;&quot;cpn&quot;&gt;
+    &lt;div&gt;
+        &lt;h2&gt;props:&lt;&#x2F;h2&gt;
+        &lt;h2&gt;data:&lt;&#x2F;h2&gt;
+        &lt;!--        &lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;dnumber1&quot;&gt;--&gt;
+        &lt;input type&#x3D;&quot;text&quot; :value&#x3D;&quot;dnumber1&quot; @input&#x3D;&quot;num1Input&quot;&gt;
+        &lt;h2&gt;props:&lt;&#x2F;h2&gt;
+        &lt;h2&gt;data:&lt;&#x2F;h2&gt;
+        &lt;!--        &lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;dnumber2&quot;&gt;--&gt;
+        &lt;input type&#x3D;&quot;text&quot; :value&#x3D;&quot;dnumber2&quot; @input&#x3D;&quot;num2Input&quot;&gt;
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+&lt;script src&#x3D;&quot;..&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;script&gt;
+    const app &#x3D; new Vue({
+        el: &#39;#app&#39;,
+        data: {
+            num1: 1,
+            num2: 0
+        },
+        methods: {
+            num1change(value) {
+                this.num1 &#x3D; parseFloat(value)
+            },
+            num2change(value) {
+                this.num2 &#x3D; parseFloat(value)
+            }
+        },
+        components: {
+            cpn: {
+                template: &#39;#cpn&#39;,
+                props: {
+                    number1: Number,
+                    number2: Number
+                },
+                data() {
+                    return {
+                        dnumber1: this.number1,
+                        dnumber2: this.number2
+                    }
+                },
+                methods: {
+                    num1Input(event) {
+                        &#x2F;&#x2F; 1.将input中的value复制到dnumber
+                        this.dnumber1 &#x3D; event.target.value;
+                        &#x2F;&#x2F; 2.为了让父组件可以修改值，发出一个事件
+                        this.$emit(&#39;num1change&#39;, this.dnumber1)
+                        &#x2F;&#x2F; 3.同时修饰dnumber2的值
+                        this.dnumber2 &#x3D; this.dnumber1 * 100;
+                        this.$emit(&#39;num2change&#39;,this.dnumber2)
+                    },
+                    num2Input(event) {
+                        this.dnumber2 &#x3D; event.target.value
+                        this.$emit(&#39;num2change&#39;, this.dnumber2)
+                        this.dnumber1 &#x3D; this.dnumber2 &#x2F; 100;
+                        this.$emit(&#39;num1change&#39;,this.dnumber1)
+                    }
+                }
+            }
+        }
+    })
+&lt;&#x2F;script&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+
+<h4> 1.3.7 父子组件的访问方式</h4>
+<h5>
+有时候我们需要父组件直接访问子组件，子组件直接访问父组件，或者是子组件访问跟组件。<br>
+    <br><li>父组件访问子组件：使用$children或$refs</li>
+    <br><li>子组件访问父组件：使用$parent</li>
+</h5><br>
+<h5>1.3.7.1 父组件访问子组件 $children和$refs（推荐）的使用</h5>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;title&gt;父访问子-children-refs&lt;&#x2F;title&gt;
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+&lt;div id&#x3D;&quot;app&quot;&gt;
+    &lt;cpn&gt;&lt;&#x2F;cpn&gt;
+    &lt;cpn&gt;&lt;&#x2F;cpn&gt;
+    &lt;cpn ref&#x3D;&quot;aaa&quot;&gt;&lt;&#x2F;cpn&gt;
+
+    &lt;button @click&#x3D;&quot;btnClick&quot;&gt;按钮&lt;&#x2F;button&gt;
+&lt;&#x2F;div&gt;
+&lt;template id&#x3D;&quot;cpn&quot;&gt;
+    &lt;div&gt;我是子组件&lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+&lt;script src&#x3D;&quot;..&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;script&gt;
+    const app &#x3D; new Vue({
+        el: &#39;#app&#39;,
+        data: {
+            message: &#39;你好啊&#39;
+        },
+        methods: {
+            btnClick() {
+                &#x2F;&#x2F; 1.$children
+                &#x2F;&#x2F; console.log(this.$children);
+                &#x2F;&#x2F; this.$children[0].showMessage()
+                &#x2F;&#x2F; console.log(this.$children[0].name);
+
+                &#x2F;&#x2F; 2.$refs（推荐）-&gt;对象类型，默认是空对象，设置ref
+                console.log(this.$refs.aaa.name);
+            }
+        },
+        components: {
+            cpn: {
+                template: &#39;#cpn&#39;,
+                data() {
+                    return {
+                        name: &#39;我是子组件的name&#39;
+                    }
+                },
+                methods: {
+                    showMessage() {
+                        console.log(&#39;showMessage&#39;)
+                    }
+                }
+            }
+        }
+    })
+&lt;&#x2F;script&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+<h5>1.3.7.2 子组件访问父组件 $parent和$root的使用</h5>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;title&gt;组件访问-子组件访问父组件&lt;&#x2F;title&gt;
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+&lt;div id&#x3D;&quot;app&quot;&gt;
+    &lt;cpn&gt;&lt;&#x2F;cpn&gt;
+&lt;&#x2F;div&gt;
+&lt;template id&#x3D;&quot;cpn&quot;&gt;
+    &lt;div&gt;
+        我是cpn组件
+        &lt;ccpn&gt;&lt;&#x2F;ccpn&gt;
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+&lt;template id&#x3D;&quot;ccpn&quot;&gt;
+    &lt;div&gt;
+        &lt;h2&gt;我是子组件&lt;&#x2F;h2&gt;
+        &lt;button @click&#x3D;&quot;btnClick&quot;&gt;按钮&lt;&#x2F;button&gt;
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+&lt;script src&#x3D;&quot;..&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;script&gt;
+    const app &#x3D; new Vue({
+        el: &#39;#app&#39;,
+        data: {
+            message: &#39;你好啊&#39;
+        },
+        components: {
+            cpn: {
+                template: &#39;#cpn&#39;,
+                components: {
+                    ccpn: {
+                        template: &#39;#ccpn&#39;,
+                        methods: {
+                            btnClick() {
+                                &#x2F;&#x2F;1.访问父组件$parent
+                                console.log(this.$parent)
+                                console.log(this.$parent.name)
+                                &#x2F;&#x2F;2.访问root组件
+                                console.log(this.$root)
+                                console.log(this.$root.message)
+                            }
+                        }
+                    }
+                }
+            },
+        },
+    })
+&lt;&#x2F;script&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+
+<h4>1.3.8 插槽slot</h4>
+<h5>多处使用一个模板，但功能不同，可以使用插槽定义（占位），后在具体应用中设置不同的功能</h5>
+<h5>插槽中可以定义默认值，之后使用重新定义可替换默认的功能</h5>
+<h5>具名插槽：给插槽定义name，使用是在标签内说明slot='name名字'，可以分辨不同的slot</h5>
+<br>作用域插槽
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;title&gt;作用域插槽&lt;&#x2F;title&gt;
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+&lt;div id&#x3D;&quot;app&quot;&gt;
+    &lt;cpn&gt;&lt;&#x2F;cpn&gt;
+    &lt;cpn&gt;
+        &lt;!--目的：获取子组件的pLanguage--&gt;
+        &lt;template slot-scope&#x3D;&quot;slot&quot;&gt;
+            &lt;!--&lt;span v-for&#x3D;&quot;item in slot.data&quot;&gt; - &lt;&#x2F;span&gt;--&gt;
+            &lt;!--使用join连接字符串--&gt;
+            &lt;span&gt;slot.data.join(&#39; - &#39;)&lt;&#x2F;span&gt;
+        &lt;&#x2F;template&gt;
+    &lt;&#x2F;cpn&gt;
+    &lt;cpn&gt;
+        &lt;!-- 目的：得到子组件的pLanguage--&gt;
+        &lt;template slot-scope&#x3D;&quot;slot&quot;&gt;
+            &lt;span v-for&#x3D;&quot;item in slot.data&quot;&gt; --&#x3D;&lt;&#x2F;span&gt;
+        &lt;&#x2F;template&gt;
+    &lt;&#x2F;cpn&gt;
+&lt;&#x2F;div&gt;
+&lt;template id&#x3D;&quot;cpn&quot;&gt;
+    &lt;div&gt;
+        &lt;!--data可改为自定义名字，获取组件中pLanguage数据--&gt;
+        &lt;slot :data&#x3D;&quot;pLanguage&quot;&gt;
+            &lt;ul&gt;
+                &lt;li v-for&#x3D;&quot;item in pLanguage&quot;&gt;&lt;&#x2F;li&gt;
+            &lt;&#x2F;ul&gt;
+        &lt;&#x2F;slot&gt;
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+&lt;script src&#x3D;&quot;..&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;script&gt;
+    &#x2F;&#x2F;const app &#x3D; new Vue({
+        el: &#39;#app&#39;,
+        data: {
+            message: &#39;你好啊&#39;
+        },
+        components: {
+            cpn: {
+                template: &#39;#cpn&#39;,
+                data() {
+                    return {
+                        pLanguage: [&#39;JavaScrpit&#39;, &#39;C++&#39;, &#39;Python&#39;, &#39;C#&#39;, &#39;Go&#39;]
+                    }
+                }
+            }
+        }
+    })
+&lt;&#x2F;script&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+
+<h4>1.3.9 模块化开发</h4>
+<h5>常见的模块化规范：CommonJS,AMD,CMD,ES6的Modules</h5>
+
+<h4>1.3.10 Webpack</h4>
+<h5>webpack是一个现代的JavaScript应用的静态模块打包工具。</h5>
+
+
+
+
 
 
 
