@@ -1082,14 +1082,357 @@
 
 <h4>1.3.10 Webpack</h4>
 <h5>webpack是一个现代的JavaScript应用的静态模块打包工具。</h5>
+<h5>插件：对某个现有的框架进行扩展</h5>
 
+<h3>1.4 Vue cli（脚手架）</h3>
+使用vue init webpack my-project(vue cli2)或者vue create my-project
+(vue cli3)初始化项目
+<h4>Vue cli2</h4>
+<img src="/img/vuecli01.png">
+<h4>Vue cli3</4>
+<img src="/img/vuecli02.png">
 
+<h4>Runtime-Compiler和Runtime-only的区别</h4>
+<br>两者在main.js中不同
+<li>如果在之后的开发中，你依然使用template，就需要选择Runtime-Compiler</li>
+<li>如果你之后的开发中，使用的是.vue文件夹开发，那么可以选择Runtime-only</li>
+<br><b>runtimecompiler：</b>
+<br>template->ast->render->vdom->UI
+<b><br>runtimeonly：（性能更高，代码量更少）</b>
+<br>render->vdom->UI
 
+<h3>1.5 vue-router（路由）</h3>
+<h4>后端路由：后端处理URL和页面之间的映射关系</h4>
+<h4>前后端分离：有ajax，前端url发送到静态资源服务器</h4>
+<h4>前端路由：前端管理映射关系，抽取一部分js代码处理</h4>
 
+<h4>1.5.1 改变URL，但是页面不进行整体的刷新的实现</h4>
+<li>url的hash：location.hash='/foo'，直接改变href</li>
+<li>html5的history模式：</li>
+<li>(1)history.pushState({},'','/foo')，可以返回</li>
+<li>(2)history.replaceState({},'','/foo')，不可以返回</li>
+<li>(3)history.go(-1)</li>
+<li>(4)history.back() 等价于 history.go(-1),history.forward() 则等价于 history.go(1)</li>
 
+<h4>1.5.2 动态路由：</h4>
+<li>在配置路由和组件映射关系式，path中，路径后加上'/:变量名'</li>
+<li>在app.vue中，绑定事件，在路径后面加上变量名，如:v-bind:to="'/user/'+userId"</li>
+<li>若要在页面显示变量，可以使用$route.params.变量名，获得当前活跃的路由，注意是route（路由），不是router（路由器）</li>
 
+<h4>1.5.3 路由懒加载</h4>
+<h5>懒加载：需要用到时才进行加载</h5>
+<h5>路由懒加载的主要作用就是将路由对应的组件打包成一个个的js代码块,只有在这个路由被访问到的时候, 才加载对应的组件</h5>
+<h5>出去三个对应的js文件，有几个组件就打包成对应的js代码块</h5>
+<li>方式一：结合Vue的异步组件和Webpack的代码分析.</li>
+const Home = resolve => { require.ensure(['../components/Home.vue'], () => { resolve(require('../components/Home.vue')) })};
+<li>方式二: AMD写法:</li>
+const About = resolve => require(['../components/About.vue'], resolve);
+<li>方式三: 在ES6中, 我们可以有更加简单的写法来组织Vue异步组件和Webpack的代码分割.</li>
+const Home = () => import('../components/Home.vue')
 
+<h4>1.5.4 $route和$router的区别</h4>
+$router为VueRouter实例，想要导航到不同URL，则使用$router.push方法
+$route为当前router跳转对象里面可以获取name、path、query、params等
 
+<h4>1.5.5 导航守卫</h4> 
+vue-router提供的导航守卫主要用来监听监听路由的进入和离开的.
+vue-router提供了beforeEach和afterEach的钩子函数, 它们会在路由即将改变前和改变后触发.
+
+<h4>1.5.6 keep-alive</h4> 
+是 Vue 内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染。
+<h5>属性：</h5>
+<li>include - 字符串或正则表达，只有匹配的组件会被缓存</li>
+<li>exclude - 字符串或正则表达式，任何匹配的组件都不会被缓存</li>
+
+<h3>1.6 Promise</h3>
+<h4>1.6.1 什么情况会用到promise？</h4>
+一般情况下是有异步操作时，使用promise对这个异步操作进行封装
+<pre><code>&#x2F;&#x2F; 什么情况会用到promise?
+    &#x2F;&#x2F; 一般情况下是有异步操作时，使用promise对这个异步操作进行封装
+    &#x2F;&#x2F; new-&gt;执行构造函数（1 保存了一些状态信息 2.执行传入函数）
+    &#x2F;&#x2F; 在执行传入的回调函数时，会传入两个参数，resolve，reject本身也是函数
+    new Promise((resolve, reject) &#x3D;&gt; {
+        setTimeout(() &#x3D;&gt; {
+            &#x2F;&#x2F; 成功时调用resolve
+            &#x2F;&#x2F; resolve(&#39;Hello world&#39;)
+            &#x2F;&#x2F; 失败时调用reject
+            reject(&#39;error message&#39;)
+        }, 1000)
+    }).then((data) &#x3D;&gt; {
+        console.log(data);
+        console.log(data);
+        console.log(data);
+        console.log(data);
+    }).catch((err) &#x3D;&gt; {
+        console.log(err);
+    })</code></pre>
+
+<h4>1.6.2 promise的三种状态</h4>
+<li>(1) pending: 等待状态，比如正在进行网络请求，或者定时器没有到时间。</li>
+<li>(2) fulfill: 满足状态，当我们主动回调了resolve时，就处于该状态，并且会回调.then()</li>
+<li>(3) reject: 拒绝状态，当我们主动回调了reject时，就处于该状态，并且会回调.catch()</li>
+
+<p>最简化代码</p>
+<pre><code>&#x2F;&#x2F; 最简化
+    new Promise((resolve, reject) &#x3D;&gt; {
+        setTimeout(() &#x3D;&gt; {
+            resolve(&#39;aaa&#39;)
+        }, 1000)
+    }).then(res &#x3D;&gt; {
+        &#x2F;&#x2F; 自己处理10行代码
+        console.log(res, &#39;第一层代码&#39;);
+&#x2F;&#x2F; 2.对结果处理
+        return res + &#39;111&#39;
+    }).then(res &#x3D;&gt; {
+        console.log(res, &#39;第二层&#39;);
+        return Promise.reject(&#39;error message&#39;)
+    }).then(res &#x3D;&gt; {
+        console.log(res, &#39;第三层代码&#39;);
+    })</code></pre>
+
+<h3>1.7 Vuex</h3>
+<h5>vuex是一个专门为vue.js应用程序开发的状态管理模式</h5>
+<h4>1.7.1 管理什么状态？</h4>
+<li>用户的登录状态、用户名称、头像、地理位置信息等等。</li>
+<li>商品的收藏、购物车中的物品等等。</li>
+    这些状态信息，我们都可以放在统一的地方，对它进行保存和管理，而且它们还是响应式的。
+<h4>1.7.2 Vuex几个核心的概念</h4>
+<li>State</li>
+<li>Getters</li>
+<li>Mutation</li>
+<li>Action</li>
+<li>Module</li>
+
+<h5>1.7.2.1 State单一状态树</h5>
+单一数据源，管理应用层的全部状态，让我们最直接的方式找到某个状态的片段，而且在之后的维护和调试过程中，也可以非常方便的管理和维护。
+
+<h5>1.7.2.2 Getters</h5>
+类似于计算属性
+<h6>index.js</h6>
+<pre><code>import Vue from &#39;vue&#39;
+import Vuex from &#39;vuex&#39;
+Vue.use(Vuex)
+const store &#x3D; new Vuex.Store({
+  state: {
+    counter: 1000,
+    students: [
+      {id: 110, name: &#39;why&#39;, age: 23},
+      {id: 112, name: &#39;Mois&#39;, age: 20},
+      {id: 113, name: &#39;dimmo&#39;, age: 10},
+      {id: 114, name: &#39;Molly&#39;, age: 19}
+    ]
+  },
+  getters: {
+    powerCounter(state) {
+      return state.counter * state.counter
+    },
+    more20stu(state) {
+      return state.students.filter(s &#x3D;&gt; s.age &gt; 10)
+    },
+    more20stuLength(state, getters) {
+      return getters.more20stu.length
+    },
+    moreAgestu(state) {
+      return function (age) {
+        return state.students.filter(s &#x3D;&gt; s.age &gt; age)
+      }
+    }
+  },
+  modules: {}
+})
+export default store</code></pre>
+<h6>App.vue</h6>
+<pre><code>&lt;template&gt;
+  &lt;div id&#x3D;&quot;app&quot;&gt;
+    &lt;h2&gt;---------App内容:getters相关信息-------------&lt;&#x2F;h2&gt;
+    &lt;h2&gt;$store.getters.powerCounter&lt;&#x2F;h2&gt;
+    &lt;h2&gt;$store.getters.more20stu&lt;&#x2F;h2&gt;
+    &lt;h2&gt;$store.getters.more20stuLength&lt;&#x2F;h2&gt;
+    &lt;h2&gt;$store.getters.moreAgestu(9)&lt;&#x2F;h2&gt;
+&lt;!--    &lt;h2&gt;$store.getters.more20stu.length&lt;&#x2F;h2&gt;--&gt;
+    &lt;h2&gt;---------HelloVuex内容-------------&lt;&#x2F;h2&gt;
+    &lt;hello-vuex&#x2F;&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+&lt;script&gt;
+  import HelloVuex from &quot;.&#x2F;components&#x2F;HelloVuex&quot;;
+    export default {
+        name: &#39;App&#39;,
+        components:{
+            HelloVuex
+        },
+        data() {
+            return {
+                message: &#39;我是app组件&#39;,
+                counter:0
+            }
+        }
+    }
+&lt;&#x2F;script&gt;</code></pre>
+
+<h5>1.7.2.3 Mutation</h5>
+<h6>Vuex的store状态的更新唯一方式：提交Mutation</h6>
+<h6>Mutation主要包括两部分：</h6>
+<li>字符串的事件类型（type）</li>
+<li>一个回调函数（handler）,该回调函数的第一个参数就是state。</li>
+<h6>Vuex的store中的state是响应式的, 当state中的数据发生改变时, Vue组件会自动更新.</h6>
+这就要求我们必须遵守一些Vuex对应的规则:
+<li>提前在store中初始化好所需的属性.</li>
+<li>当给state中的对象添加新属性时, 使用下面的方式:</li>
+方式一: 使用Vue.set(obj, 'newProp', 123)
+<br>方式二: 用心对象给旧对象重新赋值
+<br>删除使用Vue.delete
+index.js
+<pre><code>import Vue from &#39;vue&#39;
+import Vuex from &#39;vuex&#39;
+Vue.use(Vuex)
+const store &#x3D; new Vuex.Store({
+  state: {
+    counter: 1000,
+    students: [
+      {id: 110, name: &#39;why&#39;, age: 23},
+      {id: 112, name: &#39;Mois&#39;, age: 20},
+      {id: 113, name: &#39;dimmo&#39;, age: 10},
+      {id: 114, name: &#39;Molly&#39;, age: 19}
+    ]
+  },
+  &#x2F;&#x2F; 同步操作
+  mutations: {
+    increment(state) {
+      state.counter++
+    },
+    decrement(state) {
+      state.counter--
+    },
+    incrementCount(state, payload) {
+      &#x2F;&#x2F; state.counter +&#x3D; payload
+      console.log(&quot;payloas&quot;,payload);
+      console.log(&quot;count:&quot;,payload.count);
+      state.counter +&#x3D; payload.count
+    },
+    addStudent(state,stu){
+      state.students.push(stu)
+    }
+  }
+  },
+  modules: {}
+})
+export default store</code></pre>
+
+<p>app.vue</p>
+<pre><code>&lt;template&gt;
+  &lt;div id&#x3D;&quot;app&quot;&gt;
+    &lt;h2&gt;---------App内容-------------&lt;&#x2F;h2&gt;
+    &lt;h2&gt;&lt;&#x2F;h2&gt;
+    &lt;button @click&#x3D;&quot;addition&quot;&gt;+&lt;&#x2F;button&gt;
+    &lt;button @click&#x3D;&quot;subtraction&quot;&gt;-&lt;&#x2F;button&gt;
+    &lt;button @click&#x3D;&quot;addCount(5)&quot;&gt;+5&lt;&#x2F;button&gt;
+    &lt;button @click&#x3D;&quot;addCount(10)&quot;&gt;+10&lt;&#x2F;button&gt;
+    &lt;button @click&#x3D;&quot;addStudent&quot;&gt;添加学生&lt;&#x2F;button&gt;
+&lt;!--    &lt;h2&gt;&lt;&#x2F;h2&gt;--&gt;
+    &lt;h2&gt;---------HelloVuex内容-------------&lt;&#x2F;h2&gt;
+    &lt;hello-vuex&#x2F;&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+&lt;script&gt;
+  import HelloVuex from &quot;.&#x2F;components&#x2F;HelloVuex&quot;;
+    export default {
+        name: &#39;App&#39;,
+        components:{
+            HelloVuex
+        },
+        data() {
+            return {
+                message: &#39;我是app组件&#39;,
+                counter:0
+            }
+        },
+        methods:{
+            addition(){
+                &#x2F;&#x2F; 括号内为方法名
+                this.$store.commit(&#39;increment&#39;)
+            },
+            subtraction(){
+                this.$store.commit(&#39;decrement&#39;)
+            },
+            addCount(count){
+                &#x2F;&#x2F; 1、普通提交风格
+                &#x2F;&#x2F; this.$store.commit(&#39;incrementCount&#39;,count)
+                &#x2F;&#x2F; 2.特殊的提交封装
+                this.$store.commit({
+                    type:&#39;incrementCount&#39;,
+                    count
+                })
+            },
+            addStudent(){
+                const stu &#x3D;{id:114,name:&#39;alan&#39;,age:33}
+                this.$store.commit(&#39;addStudent&#39;,stu)
+            }
+        }
+    }
+&lt;&#x2F;script&gt;</code></pre>
+
+<li>字符串的事件类型（type）</li>
+<li>一个回调函数（handler）,该回调函数的第一个参数就是state。</li>
+
+<h5>1.7.2.4 Action</h5>
+Action类似于Mutation, 但是是用来代替Mutation进行异步操作的.
+调用action方法时要用dispatch
+<pre><code>mutations: {
+    updateName(state,payload){
+      state.name&#x3D;payload
+    }
+  },
+  &#x2F;&#x2F; 异步操作
+  actions: {
+    aUpdateName(context){
+      setTimeout(()&#x3D;&gt;{
+        context.commit(&#39;updateName&#39;,&#39;xixiximois&#39;)
+      },1000)
+    }
+  }
+  
+  &#x2F;&#x2F;调用
+  updateName(){
+                  this.$store.commit(&#39;updateName&#39;,&#39;hahamois&#39;)
+              },
+  </code></pre>
+
+<h5>1.7.2.5 Module</h5>
+声明一个模块，局部通过context.state暴露，根结点状态为context.rootState
+<pre><code>const moduleA&#x3D;{
+  state: {
+    name:&#39;MMMois&#39;
+  },
+  &#x2F;&#x2F; 同步操作
+  mutations: {
+    updateName(state,payload){
+      state.name&#x3D;payload
+    }
+  },
+  &#x2F;&#x2F; 异步操作
+  actions: {
+    aUpdateName(context){
+      setTimeout(()&#x3D;&gt;{
+        context.commit(&#39;updateName&#39;,&#39;xixiximois&#39;)
+      },1000)
+    }
+  },
+  &#x2F;&#x2F; 类似计算属性
+  getters: {
+    fullname(state){
+      return state.name+&#39;222222&#39;
+    },
+    fullname2(state,getters){
+      return getters.fullname+&#39;333333333&#39;
+    },
+    &#x2F;&#x2F; 拼接主模块的内容rootState
+    fullname3(state,getters,rootState){
+      return getters.fullname+&#39;333333333&#39;+rootState.counter
+    }
+  },
+}
+  </code></pre>
 
             </div>
             <hr/>
