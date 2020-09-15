@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://mois-y.github.io/"/>
-  <updated>2020-09-15T01:30:59.994Z</updated>
+  <updated>2020-09-15T12:21:01.245Z</updated>
   <id>https://mois-y.github.io/</id>
   
   <author>
@@ -17,11 +17,45 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>前端面试常见问题2</title>
+    <link href="https://mois-y.github.io/2020/09/15/qian-duan-mian-shi-chang-jian-wen-ti-2/"/>
+    <id>https://mois-y.github.io/2020/09/15/qian-duan-mian-shi-chang-jian-wen-ti-2/</id>
+    <published>2020-09-15T02:02:27.000Z</published>
+    <updated>2020-09-15T12:21:01.245Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;style&gt;
+    .context{
+        font-size:13pt;
+    }
+    .m-context{
+        font-size: 12pt;
+    }
+&lt;/style&gt;
+&lt;h2&gt;1、盒子模型&lt;/h2&gt;
+&lt;div
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="前端面试" scheme="https://mois-y.github.io/tags/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>前端面试常见问题</title>
     <link href="https://mois-y.github.io/2020/09/14/qian-duan-mian-shi-chang-jian-wen-ti/"/>
     <id>https://mois-y.github.io/2020/09/14/qian-duan-mian-shi-chang-jian-wen-ti/</id>
     <published>2020-09-14T09:51:14.000Z</published>
-    <updated>2020-09-15T01:30:59.994Z</updated>
+    <updated>2020-09-15T11:05:41.021Z</updated>
     
     <summary type="html">
     

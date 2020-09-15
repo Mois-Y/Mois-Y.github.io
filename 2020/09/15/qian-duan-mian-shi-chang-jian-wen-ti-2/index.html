@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="前端面试常见问题, Mois的博客">
+    <meta name="keywords" content="前端面试常见问题2, Mois的博客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>前端面试常见问题 | Mois的博客</title>
+    <title>前端面试常见问题2 | Mois的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">前端面试常见问题</h1>
+                    <h1 class="description center-align post-title">前端面试常见问题2</h1>
                 </div>
             </div>
         </div>
@@ -455,7 +455,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-09-14
+                    2020-09-15
                 </div>
                 
 
@@ -479,220 +479,62 @@
         font-size: 12pt;
     }
 </style>
-<h2>1、行内元素、块级元素、行内块状元素</h2>
+<h2>1、盒子模型</h2>
 <div class="context">
-HTML可以将元素分类方式分为行内元素、块状元素和行内块状元素三种。
-可以使用display属性能够将三者任意转换：<br/>
-(1) display:inline; 转换为行内元素<br/>
-(2) display:block;转换为块状元素<br/>
-(3) display:inline-block;转换为行内块状元素<br/>
+组成部分：<br/>
+<li>Margin(外边距) - 清除边框外的区域，外边距是透明的。</li>
+<li>Border(边框) - 围绕在内边距和内容外的边框。</li>
+<li>Padding(内边距) - 清除内容周围的区域，内边距是透明的。</li>
+<li>Content(内容) - 盒子的内容，显示文本和图像。</li>
+标准盒模型：box-sizing:content-box（默认）<br/>
+怪异盒模型：box-sizing:border-box
 </div>
-<h3>1.1 行内元素</h3>
+<h3>1、标准盒模型与怪异（IE）盒模型区别：</h3>
 <div class="m-context">
-特点：<br/>
-(1) 设置宽高无效<br/>
-(2) 对margin仅设置左右方向有效，上下无效<br/>
-(3) 不会自动进行换行<br/>
-常见行内元素：
-b、button、input、label、select、textarea、i、
-small、abbr、strong、a、br、img、map、object、q、
-script、span、sub、sup
+IE模型元素宽度：width=content+padding+border，<br/>
+标准模型元素宽度：width=content
 </div>
-<h3>1.2 块级元素</h3>
+<h3>2、BFC(块级格式化上下文)</h3>
 <div class="m-context">
-特点：<br/>
-(1) 能够识别宽高<br/>
-(2) margin、padding的上下左右均对其有效<br/>
-(3) 可以自动换行<br/>
-(4) 多个块状元素标签写在一起，默认排列方式为从上至下<br/>
-常见块级元素：
-address、article、aside、audio、video、blackquote、canvas、dd（定义列表条目描述）
-div、dl、fieldset（表单元素分组）、figcaption（图文信息组标题）、figure、
-header、footer、form、h1-h6、hr、hgroup、ol、ul、output、p、pre、section、table
+它是页面中的一块渲染区域，并且有一套渲染规则，
+它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。<br/>
+<b>具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。</b>
 </div>
-<h3>1.3 行内块状元素</h3>
+<h4>2.1 触发BFC</h4>
+<a>https://zhuanlan.zhihu.com/p/25321647</a>
 <div class="m-context">
-特点：<br/>
-(1) 不自动换行<br/>
-(2) 能识别宽高<br/>
-(3) 默认排列方式为从左到右<br/>
-常见行内块状元素：
-button、object、map
+<li>body根元素</li>
+<li>浮动元素：float 除 none 以外的值</li>
+<li>绝对定位元素：position (absolute、fixed)</li>
+<li>display 为 inline-block、table-cells、flex</li>
+<li>overflow 除了 visible 以外的值 (hidden、auto、scroll)</li>
 </div>
-
-<h2>2、原型</h2>
-<div class="context">
-JavaScript 只有一种结构：对象。每个实例对象（ object ）都有一个私有属性（称之为 __proto__ ）指向它的构造函数的原型对象（prototype ）。<br/>
-</div>
-<h3>2.1 _proto_ 与 prototype区别</h3>
+<h4>2.2 BFC特性及应用</h4>
 <div class="m-context">
-两者都是对象的属性<br/>
-_proto_（隐式原型）是每个对象都有的一个属性，指向该对象的构造函数的原型对象<br/>
-prototype（显示原型）函数才有的属性，指向该方法的原型对象<br/>
-具体可见<a>https://mp.weixin.qq.com/s/St78Y38j3XI2_Zv57bNZ0Q</a>
-</div>
-<h2>3、样式优先级</h2>
-<div class="context">
-内联样式>id选择器(#example)>类选择器(.example)、属性选择器[type="radio"]、伪类(:hover)
->类型选择器(h1)、伪元素(::before)<br/>
-!important例外规则：在一个样式声明中使用该规则时，此声明将覆盖任何其他声明。
-!important破坏了样式表中固有的级联规则，应该减少使用。
-</div>
-<h2>4、判断类型</h2>
-<div class="context">
- <b>基本类型(存储在栈)：</b>String、Number、Boolean、Null、Undefined、Symbol<br/>
- <b>引用类型(存储在堆heap)：</b>Object(Function、Array、RegExp、Date)<br/>
-</div>
- <h3>4.1 typeof</h3>
- <div class="m-context">
-    返回的结果用该类型的字符串(全小写字母)形式表示，
-    包括以下 7 种：number、boolean、symbol、string、object、undefined、function<br/>
-    注意：
-    <li>对于基本类型，除 null 以外，均可以返回正确的结果。</li>
-    <li>对于引用类型，除 function 以外，一律返回 object 类型。</li>
-    <li>对于 null ，返回 object 类型</li>
-    <li>对于 function 返回  function 类型。</li>
- </div>
- <h3>4.2 instanceof</h3>
- <div class="m-context">
- instanceof 是用来判断 A 是否为 B 的实例,<b>instanceof检测的是原型，
- 两个对象是否属于实例关系，不能判断属于那种类型</b>，
- 返回true、false<br/>
- 举例：
- <pre><code>[] instanceof Array; &#x2F;&#x2F; true
-{} instanceof Object;&#x2F;&#x2F; true
-newDate() instanceof Date;&#x2F;&#x2F; true
- 
-function Person(){};
-newPerson() instanceof Person;
- 
-[] instanceof Object; &#x2F;&#x2F; true
-newDate() instanceof Object;&#x2F;&#x2F; true
-newPerson instanceof Object;&#x2F;&#x2F; true</code></pre>
- </div>
- <h3>4.3 constructor</h3>
- <div class="m-context">
- 当一个函数 F被定义时，JS引擎会为F添加 prototype 原型，然后再在 prototype上添加一个 constructor 属性，并让其指向 F 的引用。<br/>
- <img src="/img/proto_constructor.png">
- <br/>
- 注意：
- <li>1. null 和 undefined 是无效的对象，因此是不会有 constructor 存在的，这两种类型的数据需要通过其他方式来判断。</li>
- <li>2. 函数的 constructor 是不稳定的，这个主要体现在自定义对象上，当开发者重写 prototype 后，原有的 constructor 引用会丢失，constructor 会默认为 Object</li>
- 因此，为了规范开发，在重写对象原型时一般都需要重新给 constructor 赋值，以保证对象实例的类型不被篡改。
- </div>
- <h3>4.4 toString</h3>
- <div class="m-context">
- toString() 是 Object 的原型方法，调用该方法，默认返回当前对象的 [[Class]] 。这是一个内部属性，其格式为 [object Xxx] ，其中 Xxx 就是对象的类型。<br/>
- 对于 Object 对象，直接调用 toString()  就能返回 [object Object] 。而对于其他对象，则需要通过 call / apply 来调用才能返回正确的类型信息。<br/>
- 如：
- <pre><code>Object.prototype.toString.call(&#39;&#39;) ;   &#x2F;&#x2F; [object String]
-Object.prototype.toString.call(1) ;    &#x2F;&#x2F; [object Number]
-Object.prototype.toString.call(true) ; &#x2F;&#x2F; [object Boolean]
-Object.prototype.toString.call(Symbol()); &#x2F;&#x2F;[object Symbol]
-Object.prototype.toString.call(undefined) ; &#x2F;&#x2F; [object Undefined]
-Object.prototype.toString.call(null) ; &#x2F;&#x2F; [object Null]
-Object.prototype.toString.call(newFunction()) ; &#x2F;&#x2F; [object Function]
-Object.prototype.toString.call(newDate()) ; &#x2F;&#x2F; [object Date]
-Object.prototype.toString.call([]) ; &#x2F;&#x2F; [object Array]
-Object.prototype.toString.call(newRegExp()) ; &#x2F;&#x2F; [object RegExp]
-Object.prototype.toString.call(newError()) ; &#x2F;&#x2F; [object Error]
-Object.prototype.toString.call(document) ; &#x2F;&#x2F; [object HTMLDocument]
-Object.prototype.toString.call(window) ; &#x2F;&#x2F;[object global] window 是全局对象 global 的引用</code></pre>
- </div>
- 参考：<a>https://www.cnblogs.com/onepixel/p/5126046.html</a>
-<h2>5、CSS度量单位、区别</h2>
-<div class="context">
-绝对长度单位：px、in、cm、mm<br/>
-相对长度单位：em、rem、ex、ch<br/>
-</div>
-<h3>px、em、rem的区别</h3>
-px：px采用参考像素，值是<b>固定</b>的<br/>
-em：<b>相对于当前元素的字体大小属性计算出来</b>，1em=16px，如果当前元素没有设置字体大小，
-依赖其父元素大小，依次类推直至找到能计算的元素<br/>
-rem:与em类似，但是是<b>相对根元素进行计算</b>。只要在html元素指定字体大小，后面元素都将使用这个大小作为基准进行计算,
-<b>此单位经常被用来做屏幕适配，保证不同设备下的显示效果。</b>
-<h2>6、new操作符步骤</h2>
-<div class="context">
-new 运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象的实例。<br/>
-<br/><b>new 关键字会进行如下的操作：
-<li> 创建一个空的简单JavaScript对象（即{}）；</li>
-<li> 链接该对象（设置该对象的constructor）到另一个对象 ；</li>
-<li> 将步骤1新创建的对象作为this的上下文 ；</li>
-<li> 如果该函数没有返回对象，则返回this。</li></b>
-创建一个用户自定义对象需要两步：<br/>
-1、通过编写函数来定义对象类型<br/>
-2、通过new来创建对象实例
-</div>
-<h2>7、二叉树遍历方法</h2>
-<div class="context">
-<li>前序遍历：根结点-->左子树-->右子树</li>
-<li>中序遍历：左子树-->根结点-->右子树</li>
-<li>后序遍历：左子树-->右子树-->根结点</li>
-<li>层次遍历</li>
-</div>
-<h2>8、cookie、localStorage、sessionStorage区别</h2>
-<img src="/img/cookieLocalstorage.jpg"/>
-<h2>9、html5的新元素、新属性</h2>
-<div class="context">
-<li>canvas:标签定义图形</li>
-</div>
-<h3>新多媒体元素</h3>
-<div class="context">
-<li>audio:音频</li>
-<li>video:视频</li>
-<li>source:定义多媒体资源audio和video</li>
-<li>embed:定义嵌入的内容，如插件</li>
-<li>track:为video和audio之类的媒介规定外部文本轨道</li>
-</div>
-<h3>新表单元素</h3>
-<div class="context">
-<li>datalist:定义选项列表，与input配合使用</li>
-<li>keygen:规定表单的密钥对生成器字段</li>
-<li>output:定义不同类型的输出</li>
-</div>
-<h3>新的语义和结构元素</h3>
-<div class="context">
-<li>article:定义页面独立的内容区域</li>
-<li>aside:定义页面的侧边栏内容</li>
-<li>bdi:允许您设置一段文本，使其脱离其父元素的文本方向设置</li>
-<li>command:定义命令按钮，比如单选按钮、复选框或按钮</li>
-<li>details:用于描述文档或文档某个部分的细节</li>
-<li>dialog:定义对话框，比如提示框</li>
-<li>summary:标签包含 details 元素的标题</li>
-<li>figure/figcaption:规定独立的流内容/figure的标题</li>
-<li>footer/header:定义 section 或 document 的页脚/文档头部</li>
-<li>mark:定义带有记号的文本。</li>
-<li>meter:定义度量衡。仅用于已知最大和最小值的度量。</li>
-<li>nav:定义导航链接的部分。</li>
-<li>progress:定义任何类型的任务的进度。</li>
-<li>ruby/rt:定义 ruby 注释（中文注音或字符）/字符（中文注音或字符）的解释或发音</li>
-<li>rp:在 ruby 注释中使用，定义不支持 ruby 元素的浏览器所显示的内容</li>
-<li>section:定义文档中的节（section、区段）</li>
-<li>time:定义日期或时间</li>
-<li>wbr:规定在文本中的何处适合添加换行符</li>
-</div>
-<h3>已移除的元素</h3>
-<div class="context">
-acronym、applet、basefont、big、center、dir、font、frame、frameset、noframes、strike、tt、
-</div>
-<h2>10、闭包</h2>
-<div class="context">
-闭包可以让你从内部函数访问外部函数作用域。<br/>
-举例：
-<pre><code>function makeFunc() {
-    var name &#x3D; &quot;Mozilla&quot;;
-    function displayName() {
-        alert(name);
-    }
-    return displayName;
-}
-
-var myFunc &#x3D; makeFunc();
-myFunc();</code></pre>
-
+<li>1 同一个BFC下外边距会发生折叠</li>
+如两个div元素margin都为100px时，第二个div的上边距发生重叠，盒子间距离只有100px，
+而不是200px,若要避免，可以将其放在不同的BFC容器中。
+<li>2 BFC 可以包含浮动的元素（清除浮动）</li>
+浮动的元素会脱离普通文档流，因此使触发元素的BFC（如：overflow:hidden），容器将会包裹着浮动元素
+<li>3 BFC可以阻止元素被浮动元素覆盖（overflow: hidden）</li>
 </div>
 
-
+<h2>2、this实例、改变this指向</h2>
+<h2>3、语义化作用及标签</h2>
+<h2>4、正则表达式</h2>
+<h2>5、异步代码</h2>
+<h2>6、http请求方法</h2>
+<h2>7、函数、变量提升</h2>
+<h2>8、brower对象</h2>
+<h2>9、boolean为true</h2>
+<h2>10、暂时死区</h2>
+<h2>11、获取元素方法</h2>
+<h2>12、异步模式方法</h2>
+<h2>13、canvas与svg区别</h2>
+<h2>14、ES5 ES6区别</h2>
+<h2>15、hasOwnProperty、isPrototypeof区别</h2>
+<h2>16、concat、append、appendTo、pop区别</h2>
+<h2>17、JS内置对象</h2>
             </div>
             <hr/>
 
@@ -717,7 +559,7 @@ myFunc();</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://mois-y.github.io/2020/09/14/qian-duan-mian-shi-chang-jian-wen-ti/">https://mois-y.github.io/2020/09/14/qian-duan-mian-shi-chang-jian-wen-ti/</a>
+                    <a href="https://mois-y.github.io/2020/09/15/qian-duan-mian-shi-chang-jian-wen-ti-2/">https://mois-y.github.io/2020/09/15/qian-duan-mian-shi-chang-jian-wen-ti-2/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -924,9 +766,10 @@ myFunc();</code></pre>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/09/15/qian-duan-mian-shi-chang-jian-wen-ti-2/">
                     <div class="card-image">
@@ -955,9 +798,9 @@ Margin(外边距) -
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-15
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-15
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -966,6 +809,7 @@ Margin(外边距) -
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -984,28 +828,34 @@ Margin(外边距) -
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/07/09/vue-xue-xi-san/">
+                <a href="/2020/09/14/qian-duan-mian-shi-chang-jian-wen-ti/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Vue学习（三）">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="前端面试常见问题">
                         
-                        <span class="card-title">Vue学习（三）</span>
+                        <span class="card-title">前端面试常见问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、 项目开发的步骤
-1.1 划分目录结构
-1.1.1 assets文件夹：放入类似css、img文件夹
-1.1.2 common文件夹：项目的公共数据，比如公共变量、方法
-1.1.3 components文件夹：项目的组件，一般里面又分为
+                            
+    .context{
+        font-size:13pt;
+    }
+    .m-context{
+        font-size: 12pt;
+    }
+
+1、行内元素、块级元素、行内块状元素
+
+HTML可以将
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-14
                             </span>
                         <span class="publish-author">
                             
@@ -1018,8 +868,8 @@ Margin(外边距) -
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">前端学习</span>
+                    <a href="/tags/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/">
+                        <span class="chip bg-color">前端面试</span>
                     </a>
                     
                 </div>
