@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Vue学习（三）, Mois的博客">
+    <meta name="keywords" content="前端面试常见问题, Mois的博客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Vue学习（三） | Mois的博客</title>
+    <title>前端面试常见问题 | Mois的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -314,7 +314,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Vue学习（三）</h1>
+                    <h1 class="description center-align post-title">前端面试常见问题</h1>
                 </div>
             </div>
         </div>
@@ -439,8 +439,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/">
-                                <span class="chip bg-color">前端学习</span>
+                            <a href="/tags/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/">
+                                <span class="chip bg-color">前端面试</span>
                             </a>
                         
                     </div>
@@ -455,7 +455,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-07-09
+                    2020-09-14
                 </div>
                 
 
@@ -471,20 +471,131 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3>一、 项目开发的步骤</h3>
-<li style="font-size: large">1.1 划分目录结构</li>
-1.1.1 assets文件夹：放入类似css、img文件夹
-<br>1.1.2 common文件夹：项目的公共数据，比如公共变量、方法
-<br>1.1.3 components文件夹：项目的组件，一般里面又分为两个文件夹，common（其他项目也可以用的组件）、content（只有此项目用的组件）
-<br>1.1.4 network文件夹：网络目录
-<br>1.1.5 router文件夹：路由目录
-<br>1.1.6 store文件夹：仓库目录
-<br>1.1.6 views文件夹：大的视图块<br>
-<li style="font-size: large">1.2 引用css文件</li><br>
-<li style="font-size: large">1.3 设置别名</li>
-<li>在文件中创建vue.config.js文件，router和store可以不设置别名</li>
-<li>设置.editorconfig文件</li><br>
-<li style="font-size: large">1.4 项目的模块划分：路由映射关系</li>
+                <style>
+    .context{
+        font-size:13pt;
+    }
+    .m-context{
+        font-size: 12pt;
+    }
+</style>
+<h2>1、行内元素、块级元素、行内块状元素</h2>
+<div class="context">
+HTML可以将元素分类方式分为行内元素、块状元素和行内块状元素三种。
+可以使用display属性能够将三者任意转换：<br/>
+(1) display:inline; 转换为行内元素<br/>
+(2) display:block;转换为块状元素<br/>
+(3) display:inline-block;转换为行内块状元素<br/>
+<h3>1.1 行内元素</h3>
+<div class="m-context">
+特点：<br/>
+(1) 设置宽高无效<br/>
+(2) 对margin仅设置左右方向有效，上下无效<br/>
+(3) 不会自动进行换行<br/>
+常见行内元素：
+b、button、input、label、select、textarea、i、
+small、abbr、strong、a、br、img、map、object、q、
+script、span、sub、sup
+</div>
+<h3>1.2 块级元素</h3>
+<div class="m-context">
+特点：<br/>
+(1) 能够识别宽高<br/>
+(2) margin、padding的上下左右均对其有效<br/>
+(3) 可以自动换行<br/>
+(4) 多个块状元素标签写在一起，默认排列方式为从上至下<br/>
+常见块级元素：
+address、article、aside、audio、video、blackquote、canvas、dd（定义列表条目描述）
+div、dl、fieldset（表单元素分组）、figcaption（图文信息组标题）、figure、
+header、footer、form、h1-h6、hr、hgroup、ol、ul、output、p、pre、section、table
+</div>
+<h3>1.3 行内块状元素</h3>
+<div class="m-context">
+特点：<br/>
+(1) 不自动换行<br/>
+(2) 能识别宽高<br/>
+(3) 默认排列方式为从左到右<br/>
+常见行内块状元素：
+button、object、map
+</div>
+</div>
+
+<h2>2、原型</h2>
+<div class="context">
+JavaScript 只有一种结构：对象。每个实例对象（ object ）都有一个私有属性（称之为 __proto__ ）指向它的构造函数的原型对象（prototype ）。<br/>
+</div>
+<h3>2.1 _proto 与 prototype区别</h3>
+<div class="m-context">
+两者都是对象的属性<br/>
+_proto_（隐式原型）是每个对象都有的一个属性，指向该对象的构造函数的原型对象<br/>
+prototype（显示原型）函数才有的属性，指向该方法的原型对象<br/>
+具体可见<a>https://mp.weixin.qq.com/s/St78Y38j3XI2_Zv57bNZ0Q</a>
+</div>
+<h2>3、样式优先级</h2>
+<div class="context">
+内联样式>id选择器(#example)>类选择器(.example)、属性选择器[type="radio"]、伪类(:hover)
+>类型选择器(h1)、伪元素(::before)<br/>
+!important例外规则：在一个样式声明中使用该规则时，此声明将覆盖任何其他声明。
+!important破坏了样式表中固有的级联规则，应该减少使用。
+</div>
+<h2>4、判断类型</h2>
+<div class="context">
+ <b>基本类型(存储在栈)：</b>String、Number、Boolean、Null、Undefined、Symbol<br/>
+ <b>引用类型(存储在堆heap)：</b>Object(Function、Array、RegExp、Date)<br/>
+ <h3>4.1 typeof</h3>
+ <div class="m-context">
+    返回的结果用该类型的字符串(全小写字母)形式表示，
+    包括以下 7 种：number、boolean、symbol、string、object、undefined、function<br/>
+    注意：
+    <li>对于基本类型，除 null 以外，均可以返回正确的结果。</li>
+    <li>对于引用类型，除 function 以外，一律返回 object 类型。</li>
+    <li>对于 null ，返回 object 类型</li>
+    <li>对于 function 返回  function 类型。</li>
+ </div>
+ <h3>4.2 instanceof</h3>
+ <div class="m-context">
+ instanceof 是用来判断 A 是否为 B 的实例,<b>instanceof检测的是原型，
+ 两个对象是否属于实例关系，不能判断属于那种类型</b>，
+ 返回true、false<br/>
+ 举例：
+ <pre><code>[] instanceof Array; &#x2F;&#x2F; true
+{} instanceof Object;&#x2F;&#x2F; true
+newDate() instanceof Date;&#x2F;&#x2F; true
+ 
+function Person(){};
+newPerson() instanceof Person;
+ 
+[] instanceof Object; &#x2F;&#x2F; true
+newDate() instanceof Object;&#x2F;&#x2F; true
+newPerson instanceof Object;&#x2F;&#x2F; true</code></pre>
+ </div>
+ <h3>4.3 constructor</h3>
+ <div class="m-context">
+
+ </div>
+ <h3>4.4</h3>
+ <div class="m-context"></div>
+</div>
+<h2>5、CSS度量单位、区别</h2>
+<h2>6、new操作符步骤</h2>
+<h2>7、二叉树遍历方法</h2>
+<h2>8、cookie、localStorage、sessionStorage区别</h2>
+<h2>9、html5的新元素、新属性</h2>
+<h2>10、闭包</h2>
+<h2>11、盒子模型</h2>
+<h2>12、this实例、改变this指向</h2>
+<h2>13、语义化作用及标签</h2>
+<h2>14、正则表达式</h2>
+<h2>15、异步代码</h2>
+<h2>16、http请求方法</h2>
+<h2>17、函数、变量提升</h2>
+<h2>18、brower对象</h2>
+<h2>19、boolean为true</h2>
+<h2>20、暂时死区</h2>
+<h2>21、获取元素方法</h2>
+<h2>22、异步模式方法</h2>
+<h2>23、canvas与svg区别</h2>
+<h2>24、ES5 ES6区别</h2>
 
             </div>
             <hr/>
@@ -510,7 +621,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://mois-y.github.io/2020/07/09/vue-xue-xi-san/">https://mois-y.github.io/2020/07/09/vue-xue-xi-san/</a>
+                    <a href="https://mois-y.github.io/2020/09/14/qian-duan-mian-shi-chang-jian-wen-ti/">https://mois-y.github.io/2020/09/14/qian-duan-mian-shi-chang-jian-wen-ti/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -548,8 +659,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/">
-                                    <span class="chip bg-color">前端学习</span>
+                                <a href="/tags/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/">
+                                    <span class="chip bg-color">前端面试</span>
                                 </a>
                             
                         </div>
@@ -717,9 +828,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/09/14/qian-duan-mian-shi-chang-jian-wen-ti/">
                     <div class="card-image">
@@ -747,9 +859,9 @@ HTML可以将
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -758,6 +870,7 @@ HTML可以将
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -776,29 +889,28 @@ HTML可以将
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/06/28/vue-xue-xi-er/">
+                <a href="/2020/07/09/vue-xue-xi-san/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Vue学习（二）">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Vue学习（三）">
                         
-                        <span class="card-title">Vue学习（二）</span>
+                        <span class="card-title">Vue学习（三）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            1.1 过滤器：
-在js中使用filters设置，运用‘item|过滤器’
-
-1.2 v-model：
-v-model指令可以实现表单元素和数据的双向绑定，如：动态得到输入框(input、textarea)的值
-v-model其实是一个语法
+                            一、 项目开发的步骤
+1.1 划分目录结构
+1.1.1 assets文件夹：放入类似css、img文件夹
+1.1.2 common文件夹：项目的公共数据，比如公共变量、方法
+1.1.3 components文件夹：项目的组件，一般里面又分为
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-09
                             </span>
                         <span class="publish-author">
                             

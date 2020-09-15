@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>前端面试常见问题</title>
+      <link href="/2020/09/14/qian-duan-mian-shi-chang-jian-wen-ti/"/>
+      <url>/2020/09/14/qian-duan-mian-shi-chang-jian-wen-ti/</url>
+      
+        <content type="html"><![CDATA[<style>    .context{        font-size:13pt;    }    .m-context{        font-size: 12pt;    }</style><h2>1、行内元素、块级元素、行内块状元素</h2><div class="context">HTML可以将元素分类方式分为行内元素、块状元素和行内块状元素三种。可以使用display属性能够将三者任意转换：<br/>(1) display:inline; 转换为行内元素<br/>(2) display:block;转换为块状元素<br/>(3) display:inline-block;转换为行内块状元素<br/><h3>1.1 行内元素</h3><div class="m-context">特点：<br/>(1) 设置宽高无效<br/>(2) 对margin仅设置左右方向有效，上下无效<br/>(3) 不会自动进行换行<br/>常见行内元素：b、button、input、label、select、textarea、i、small、abbr、strong、a、br、img、map、object、q、script、span、sub、sup</div><h3>1.2 块级元素</h3><div class="m-context">特点：<br/>(1) 能够识别宽高<br/>(2) margin、padding的上下左右均对其有效<br/>(3) 可以自动换行<br/>(4) 多个块状元素标签写在一起，默认排列方式为从上至下<br/>常见块级元素：address、article、aside、audio、video、blackquote、canvas、dd（定义列表条目描述）div、dl、fieldset（表单元素分组）、figcaption（图文信息组标题）、figure、header、footer、form、h1-h6、hr、hgroup、ol、ul、output、p、pre、section、table</div><h3>1.3 行内块状元素</h3><div class="m-context">特点：<br/>(1) 不自动换行<br/>(2) 能识别宽高<br/>(3) 默认排列方式为从左到右<br/>常见行内块状元素：button、object、map</div></div><h2>2、原型</h2><div class="context">JavaScript 只有一种结构：对象。每个实例对象（ object ）都有一个私有属性（称之为 __proto__ ）指向它的构造函数的原型对象（prototype ）。<br/></div><h3>2.1 _proto 与 prototype区别</h3><div class="m-context">两者都是对象的属性<br/>_proto_（隐式原型）是每个对象都有的一个属性，指向该对象的构造函数的原型对象<br/>prototype（显示原型）函数才有的属性，指向该方法的原型对象<br/>具体可见<a>https://mp.weixin.qq.com/s/St78Y38j3XI2_Zv57bNZ0Q</a></div><h2>3、样式优先级</h2><div class="context">内联样式>id选择器(#example)>类选择器(.example)、属性选择器[type="radio"]、伪类(:hover)>类型选择器(h1)、伪元素(::before)<br/>!important例外规则：在一个样式声明中使用该规则时，此声明将覆盖任何其他声明。!important破坏了样式表中固有的级联规则，应该减少使用。</div><h2>4、判断类型</h2><div class="context"> <b>基本类型(存储在栈)：</b>String、Number、Boolean、Null、Undefined、Symbol<br/> <b>引用类型(存储在堆heap)：</b>Object(Function、Array、RegExp、Date)<br/> <h3>4.1 typeof</h3> <div class="m-context">    返回的结果用该类型的字符串(全小写字母)形式表示，    包括以下 7 种：number、boolean、symbol、string、object、undefined、function<br/>    注意：    <li>对于基本类型，除 null 以外，均可以返回正确的结果。</li>    <li>对于引用类型，除 function 以外，一律返回 object 类型。</li>    <li>对于 null ，返回 object 类型</li>    <li>对于 function 返回  function 类型。</li> </div> <h3>4.2 instanceof</h3> <div class="m-context"> instanceof 是用来判断 A 是否为 B 的实例,<b>instanceof检测的是原型， 两个对象是否属于实例关系，不能判断属于那种类型</b>， 返回true、false<br/> 举例： <pre><code>[] instanceof Array; &#x2F;&#x2F; true{} instanceof Object;&#x2F;&#x2F; truenewDate() instanceof Date;&#x2F;&#x2F; true function Person(){};newPerson() instanceof Person; [] instanceof Object; &#x2F;&#x2F; truenewDate() instanceof Object;&#x2F;&#x2F; truenewPerson instanceof Object;&#x2F;&#x2F; true</code></pre> </div> <h3>4.3 constructor</h3> <div class="m-context"> </div> <h3>4.4</h3> <div class="m-context"></div></div><h2>5、CSS度量单位、区别</h2><h2>6、new操作符步骤</h2><h2>7、二叉树遍历方法</h2><h2>8、cookie、localStorage、sessionStorage区别</h2><h2>9、html5的新元素、新属性</h2><h2>10、闭包</h2><h2>11、盒子模型</h2><h2>12、this实例、改变this指向</h2><h2>13、语义化作用及标签</h2><h2>14、正则表达式</h2><h2>15、异步代码</h2><h2>16、http请求方法</h2><h2>17、函数、变量提升</h2><h2>18、brower对象</h2><h2>19、boolean为true</h2><h2>20、暂时死区</h2><h2>21、获取元素方法</h2><h2>22、异步模式方法</h2><h2>23、canvas与svg区别</h2><h2>24、ES5 ES6区别</h2>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 前端面试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Vue学习（三）</title>
       <link href="/2020/07/09/vue-xue-xi-san/"/>
       <url>/2020/07/09/vue-xue-xi-san/</url>
