@@ -524,7 +524,7 @@ button、object、map
 <div class="context">
 JavaScript 只有一种结构：对象。每个实例对象（ object ）都有一个私有属性（称之为 __proto__ ）指向它的构造函数的原型对象（prototype ）。<br/>
 </div>
-<h3>2.1 _proto 与 prototype区别</h3>
+<h3>2.1 _proto_ 与 prototype区别</h3>
 <div class="m-context">
 两者都是对象的属性<br/>
 _proto_（隐式原型）是每个对象都有的一个属性，指向该对象的构造函数的原型对象<br/>
@@ -571,10 +571,34 @@ newPerson instanceof Object;&#x2F;&#x2F; true</code></pre>
  </div>
  <h3>4.3 constructor</h3>
  <div class="m-context">
-
+ 当一个函数 F被定义时，JS引擎会为F添加 prototype 原型，然后再在 prototype上添加一个 constructor 属性，并让其指向 F 的引用。<br/>
+ <img src="/img/proto_constructor.png">
+ <br/>
+ 注意：
+ <li>1. null 和 undefined 是无效的对象，因此是不会有 constructor 存在的，这两种类型的数据需要通过其他方式来判断。</li>
+ <li>2. 函数的 constructor 是不稳定的，这个主要体现在自定义对象上，当开发者重写 prototype 后，原有的 constructor 引用会丢失，constructor 会默认为 Object</li>
+ 因此，为了规范开发，在重写对象原型时一般都需要重新给 constructor 赋值，以保证对象实例的类型不被篡改。
  </div>
- <h3>4.4</h3>
- <div class="m-context"></div>
+ <h3>4.4 toString</h3>
+ <div class="m-context">
+ toString() 是 Object 的原型方法，调用该方法，默认返回当前对象的 [[Class]] 。这是一个内部属性，其格式为 [object Xxx] ，其中 Xxx 就是对象的类型。<br/>
+ 对于 Object 对象，直接调用 toString()  就能返回 [object Object] 。而对于其他对象，则需要通过 call / apply 来调用才能返回正确的类型信息。<br/>
+ 如：
+ <pre><code>Object.prototype.toString.call(&#39;&#39;) ;   &#x2F;&#x2F; [object String]
+Object.prototype.toString.call(1) ;    &#x2F;&#x2F; [object Number]
+Object.prototype.toString.call(true) ; &#x2F;&#x2F; [object Boolean]
+Object.prototype.toString.call(Symbol()); &#x2F;&#x2F;[object Symbol]
+Object.prototype.toString.call(undefined) ; &#x2F;&#x2F; [object Undefined]
+Object.prototype.toString.call(null) ; &#x2F;&#x2F; [object Null]
+Object.prototype.toString.call(newFunction()) ; &#x2F;&#x2F; [object Function]
+Object.prototype.toString.call(newDate()) ; &#x2F;&#x2F; [object Date]
+Object.prototype.toString.call([]) ; &#x2F;&#x2F; [object Array]
+Object.prototype.toString.call(newRegExp()) ; &#x2F;&#x2F; [object RegExp]
+Object.prototype.toString.call(newError()) ; &#x2F;&#x2F; [object Error]
+Object.prototype.toString.call(document) ; &#x2F;&#x2F; [object HTMLDocument]
+Object.prototype.toString.call(window) ; &#x2F;&#x2F;[object global] window 是全局对象 global 的引用</code></pre>
+ </div>
+ 参考：<a>https://www.cnblogs.com/onepixel/p/5126046.html</a>
 </div>
 <h2>5、CSS度量单位、区别</h2>
 <h2>6、new操作符步骤</h2>
@@ -1152,7 +1176,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:1002584986@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1162,7 +1186,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1002584986" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1002584986" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
